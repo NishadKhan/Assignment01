@@ -58,8 +58,15 @@ namespace Banksystem
         public void Transaction(int transactionType)
         {
             int amount;
-            Account receiver;
+            int select;
+            //   Account receiver;
+
+            Console.WriteLine("1.withdraw");
+            Console.WriteLine("2.Deposit");
+            Console.WriteLine("3.Transfer");
+            select = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter account no: ");
+           
             int accountnumber = Convert.ToInt32(Console.ReadLine());
             for (int i = 0; i < MyBank.Length; i++)
             {
@@ -82,11 +89,11 @@ namespace Banksystem
                     }
 
                     else if (transactionType == 3)
-                    {
+                    { 
                         Console.WriteLine("Enter amount and revceiver id");
                         amount = Convert.ToInt32(Console.ReadLine());
-                        //receiver = Convert.ToInt32(Console.ReadLine());
-                        MyBank[accountnumber].Transfer(amount, receiver);
+                       // receiver = Convert.ToInt32(Console.ReadLine());
+                      //  MyBank[accountnumber].Transfer(amount, receiver);
                     }
 
                     else
