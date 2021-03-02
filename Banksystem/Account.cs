@@ -8,14 +8,16 @@ namespace Banksystem
 {
     class Account
     {
-        private int accountNumber;
+        private int accountNumber=1;
+        private static int myaccountnumber;
         private string accountName;
         private Double balance;
         private Address address;
 
+
         public Account(int accountNumber, string accountName, double balance, Address address)
         {
-            this.AccountNumber = accountNumber;
+            accountNumber= accountNumber+ myaccountnumber;
             this.AccountName = accountName;
             this.Balance = balance;
             this.Address = address;
@@ -23,8 +25,8 @@ namespace Banksystem
         public int AccountNumber
         {
 
-            set { this.accountNumber = value; }
-            get { return this.accountNumber; }
+            set { accountNumber = value; }
+            get { return accountNumber; }
         }
         public String AccountName
         {
@@ -47,30 +49,38 @@ namespace Banksystem
 
         public void Withdraw(double amount)
         {
-            if (this.Balance - amount >= 500)
+            if (amount > 0 && amount <= this.balance)
             {
                 this.Balance = this.Balance - amount;
+                Console.WriteLine("Withdraw Successful");
             }
             else
             {
-                Console.WriteLine("Insufficiant Balance");
+                Console.WriteLine("Balance not found");
             }
         }
         public void Deposit(double amount)
         {
             this.Balance = this.Balance + amount;
+            Console.WriteLine("Deposit Successful");
         }
+       
         public void Transfer(double amount, Account receiver)
         {
 
             this.Withdraw(amount);
             receiver.Deposit(amount);
+            Console.WriteLine("Transfer succcessful");
         }
         public void ShowAccountInformation()
         {
-            Console.WriteLine("Account No:{0}\nAccount Name:{1}\nBalance:{2}", this.accountNumber, this.accountName, this.balance);
+            Console.WriteLine("Account No:{0}\nAccount Name:{1}\nBalance:{2}", accountNumber, this.accountName, this.balance);
             this.Address.GetAddress();
         }
 
+        internal void Transfer(int amount, int receiver)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

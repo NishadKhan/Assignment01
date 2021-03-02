@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Banksystem
 {
-    class Bank
+     class Bank
     {
         private string bankName;
         private Account[] myBank;
@@ -34,35 +34,88 @@ namespace Banksystem
                 if (MyBank[i] == null)
                 {
                     MyBank[i] = account;
+                    Console.WriteLine("Account Added");
                     break;
                 }
             }
         }
+    
 
         public void DeleteAccount(int AccountNumber)
         {
             for (int i = 0; i < MyBank.Length; i++)
             {
-                if ()
+                if (MyBank[i].AccountNumber == AccountNumber)
+                {
+                    MyBank[i] = null;
+                    Console.WriteLine("Account deleted");
+                    break;
+                }
 
             }
 
         }
-        public void Transection(int transectionType)
-        { }
-
-
-        public void PrintAccountDetailes()
+        public void Transection(int choice)
         {
+            int amount, receiver;
+            int accountnumber = Convert.ToInt32(Console.ReadLine());
+
             for (int i = 0; i < MyBank.Length; i++)
             {
-                if (MyBank[i] == null)
+                if (MyBank[i] != MyBank[accountnumber])
                 {
-                    continue;
+                    Console.WriteLine("Account Does Not exist");
+                    break;
                 }
-                MyBank[i].ShowAccountInformation();
-            }
+                else if (MyBank[i] == MyBank[accountnumber])
 
+                {
+                    if (choice == 1)
+                    {
+                        Console.WriteLine("Enter amount");
+                        amount = Convert.ToInt32(Console.ReadLine());
+                        MyBank[accountnumber].Withdraw(amount);
+
+                    }
+
+                    if (choice == 2)
+                    {
+                        Console.WriteLine("Enter amount");
+                        amount = Convert.ToInt32(Console.ReadLine());
+                        MyBank[accountnumber].Deposit(amount);
+
+                    }
+                    if (choice == 3)
+                    {
+                        Console.WriteLine("Enter amount");
+                        amount = Convert.ToInt32(Console.ReadLine());
+                        receiver = Convert.ToInt32(Console.ReadLine());
+                        MyBank[accountnumber].Transfer(amount, receiver);
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Request");
+                        break;
+                    }
+                }
+            }
+        }
+
+
+            public void PrintAccountDetailes()
+            {
+                for (int i = 0; i < MyBank.Length; i++)
+                {
+                    if (MyBank[i] == null)
+                    {
+                        continue;
+                    }
+                    MyBank[i].ShowAccountInformation();
+                }
+
+            }
         }
     }
-}
+
+    
