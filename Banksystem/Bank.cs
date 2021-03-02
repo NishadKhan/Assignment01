@@ -45,7 +45,7 @@ namespace Banksystem
         {
             for (int i = 0; i < MyBank.Length; i++)
             {
-                if (MyBank[i].AccountNumber == AccountNumber)
+                if (MyBank[i] ==MyBank[AccountNumber])
                 {
                     MyBank[i] = null;
                     Console.WriteLine("Account deleted");
@@ -55,55 +55,50 @@ namespace Banksystem
             }
 
         }
-        public void Transection(int choice)
+        public void Transaction(int transactionType)
         {
-            int amount, receiver;
+            int amount;
+            Account receiver;
+            Console.WriteLine("Enter account no: ");
             int accountnumber = Convert.ToInt32(Console.ReadLine());
-
             for (int i = 0; i < MyBank.Length; i++)
             {
-                if (MyBank[i] != MyBank[accountnumber])
-                {
-                    Console.WriteLine("Account Does Not exist");
-                    break;
-                }
-                else if (MyBank[i] == MyBank[accountnumber])
 
+                if (MyBank[i] == MyBank[accountnumber])
                 {
-                    if (choice == 1)
+                    if (transactionType == 1)
                     {
+
                         Console.WriteLine("Enter amount");
                         amount = Convert.ToInt32(Console.ReadLine());
                         MyBank[accountnumber].Withdraw(amount);
-
                     }
 
-                    if (choice == 2)
+                    else if (transactionType == 2)
                     {
                         Console.WriteLine("Enter amount");
                         amount = Convert.ToInt32(Console.ReadLine());
                         MyBank[accountnumber].Deposit(amount);
-
                     }
-                    if (choice == 3)
+
+                    else if (transactionType == 3)
                     {
-                        Console.WriteLine("Enter amount");
+                        Console.WriteLine("Enter amount and revceiver id");
                         amount = Convert.ToInt32(Console.ReadLine());
-                        receiver = Convert.ToInt32(Console.ReadLine());
+                        //receiver = Convert.ToInt32(Console.ReadLine());
                         MyBank[accountnumber].Transfer(amount, receiver);
+                    }
 
-                    }
                     else
-                    {
-                        Console.WriteLine("Invalid Request");
-                        break;
-                    }
+                        Console.WriteLine("404 Error");
+
+                    break;
+
                 }
             }
         }
 
-
-            public void PrintAccountDetailes()
+        public void PrintAccountDetailes()
             {
                 for (int i = 0; i < MyBank.Length; i++)
                 {

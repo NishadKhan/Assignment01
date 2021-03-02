@@ -13,21 +13,30 @@ namespace Banksystem
         private string accountName;
         private Double balance;
         private Address address;
+        //private string v1;
+        //private int v2;
 
-
-        public Account(int accountNumber, string accountName, double balance, Address address)
+        public Account( string accountName, double balance, Address address)
         {
-            accountNumber= accountNumber+ myaccountnumber;
+            accountNumber = ++myaccountnumber;
             this.AccountName = accountName;
             this.Balance = balance;
             this.Address = address;
         }
-        public int AccountNumber
-        {
 
-            set { accountNumber = value; }
-            get { return accountNumber; }
-        }
+    // /*   public Account(string v1, int v2, Address address)
+    //    {
+    //        this.v1 = v1;
+    //        this.v2 = v2;
+    //        this.address = address;
+    //    }
+    //*/
+        //public int AccountNumber
+        //{
+
+        //    set { accountNumber = value; }
+        //    get { return accountNumber; }
+        //}
         public String AccountName
         {
             set { this.accountName = value; }
@@ -47,19 +56,22 @@ namespace Banksystem
             get { return this.address; }
         }
 
-        public void Withdraw(double amount)
-        {
-            if (amount > 0 && amount <= this.balance)
+        
+            public void Withdraw(double amount)
             {
-                this.Balance = this.Balance - amount;
-                Console.WriteLine("Withdraw Successful");
+                if (this.Balance - amount >= 200)
+                {
+                    this.Balance = this.Balance - amount;
+                    Console.WriteLine("Withdraw successful");
+
+                }
+                else
+                {
+                    Console.WriteLine("No Balance");
+                }
             }
-            else
-            {
-                Console.WriteLine("Balance not found");
-            }
-        }
-        public void Deposit(double amount)
+        
+            public void Deposit(double amount)
         {
             this.Balance = this.Balance + amount;
             Console.WriteLine("Deposit Successful");
@@ -75,7 +87,7 @@ namespace Banksystem
         public void ShowAccountInformation()
         {
             Console.WriteLine("Account No:{0}\nAccount Name:{1}\nBalance:{2}", accountNumber, this.accountName, this.balance);
-            this.Address.GetAddress();
+            Console.WriteLine(this.Address.GetAddress());
         }
 
         internal void Transfer(int amount, int receiver)
